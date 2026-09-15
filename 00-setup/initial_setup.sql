@@ -19,6 +19,8 @@
 -- - Attaches your public key so Terraform can sign JWTs with the private key.
 -- - Grants SYSADMIN  (lessons 01 and 03: databases, warehouses, stages)
 -- - Grants SECURITYADMIN (lesson 02: users, roles, grants)
+-- - Grants USAGE on the trial COMPUTE_WH to those roles (the warehouse
+--   exists; SYSADMIN is not authorized to use it until this grant)
 -- - Leaves ACCOUNTADMIN on your human user. Lesson 03's resource monitor is
 --   optional and needs that role; see the commented grant at the bottom.
 -- =============================================================================
@@ -79,6 +81,17 @@ ALTER USER TERRAFORM_SVC SET DEFAULT_ROLE = SYSADMIN;
 
 
 -- -----------------------------------------------------------------------------
+-- Trial warehouses (COMPUTE_WH) are created for you and owned by
+-- ACCOUNTADMIN. Snowflake's error is "does not exist or not authorized" —
+-- the warehouse is there; SYSADMIN just cannot USE it yet.
+-- Both Terraform provider aliases set warehouse on the session, so both
+-- roles need USAGE. Without this, terraform plan fails before any resource.
+-- -----------------------------------------------------------------------------
+GRANT USAGE ON WAREHOUSE COMPUTE_WH TO ROLE SYSADMIN;
+GRANT USAGE ON WAREHOUSE COMPUTE_WH TO ROLE SECURITYADMIN;
+
+
+-- -----------------------------------------------------------------------------
 -- Sanity checks
 -- SHOW USERS: TYPE = SERVICE, HAS_RSA_PUBLIC_KEY = true
 -- DESC USER:  RSA_PUBLIC_KEY_FP has a fingerprint
@@ -86,6 +99,7 @@ ALTER USER TERRAFORM_SVC SET DEFAULT_ROLE = SYSADMIN;
 SHOW USERS LIKE 'TERRAFORM_SVC';
 DESC USER TERRAFORM_SVC;
 SHOW GRANTS TO USER TERRAFORM_SVC;
+SHOW GRANTS ON WAREHOUSE COMPUTE_WH;
 
 
 -- =============================================================================

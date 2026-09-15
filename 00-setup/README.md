@@ -88,6 +88,7 @@ Expected checks:
 - `SHOW USERS LIKE 'TERRAFORM_SVC'` → `TYPE` is `SERVICE`, `HAS_RSA_PUBLIC_KEY` is true
 - `DESC USER TERRAFORM_SVC` → `RSA_PUBLIC_KEY_FP` is set
 - `SHOW GRANTS TO USER TERRAFORM_SVC` → `SYSADMIN` and `SECURITYADMIN`
+- `SHOW GRANTS ON WAREHOUSE COMPUTE_WH` → `USAGE` for `SYSADMIN` and `SECURITYADMIN`
 
 
 ## Step 4 — Local Terraform variables
@@ -118,6 +119,7 @@ If the plan can reach Snowflake, authentication worked. Continue to [01 — Data
 | JWT / public key error | `BEGIN PUBLIC KEY` lines were pasted, or `.p8` does not match `.pub` |
 | `HAS_RSA_PUBLIC_KEY` is false | `CREATE USER IF NOT EXISTS` skipped an old user. Run the `ALTER USER ... SET RSA_PUBLIC_KEY` line |
 | MFA / password prompts | Provider is using your human user instead of `TERRAFORM_SVC` |
+| Warehouse does not exist or not authorized | `COMPUTE_WH` exists but the role lacks `USAGE`. Re-run the warehouse `GRANT` lines in `initial_setup.sql` |
 
 
 ## Starting over
