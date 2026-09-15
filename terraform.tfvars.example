@@ -7,4 +7,7 @@ account_name      = "your_account_name"
 
 # user               = "TERRAFORM_SVC"
 # private_key_path   = ".ssh/snowflake_tf_snow_key.p8"
+
+# After initial_setup.sql grants USAGE on COMPUTE_WH, you can set this.
+# Creating a database still works with it unset.
 # provider_warehouse = "COMPUTE_WH"

@@ -29,5 +29,5 @@ provider "snowflake" {
   role              = "SECURITYADMIN"
   authenticator     = "SNOWFLAKE_JWT"
   private_key       = file(pathexpand(var.private_key_path))
-  warehouse         = var.provider_warehouse
+  warehouse         = var.provider_warehouse != "" ? var.provider_warehouse : null
 }

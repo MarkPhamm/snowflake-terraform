@@ -1,8 +1,14 @@
 # Local Snowflake key pair — never commit private keys
 .ssh/
 
-# Local .terraform directories
+# Local .terraform directories (downloaded providers)
 .terraform/
+
+# Lock file belongs only at the repo root (where you run terraform init).
+# Child modules such as 01-data/database/ should not have their own.
+**/.terraform.lock.hcl
+!/.terraform.lock.hcl
+
 
 # .tfstate files
 *.tfstate

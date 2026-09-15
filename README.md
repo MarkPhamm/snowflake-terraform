@@ -53,7 +53,7 @@ account
 
 Use Snowsight to bootstrap and to inspect. Use Terraform to declare objects in files.
 
-![Snowflake trial signup](assets/freetrial.png)
+![Snowflake trial signup](assets/00-setup/freetrial.png)
 
 
 ## Follow along

@@ -5,7 +5,7 @@ Do this once. Later lessons assume `TERRAFORM_SVC` can open a session.
 This folder is not a Terraform object lesson. It is the chicken-and-egg step: Snowflake must already have a user before Terraform can log in as that user.
 
 
-## What you will dos
+## What you will do
 
 1. Sign up for a trial (or use any account where you have `ACCOUNTADMIN`).
 2. Generate a local RSA key pair.
@@ -23,7 +23,7 @@ Snowsight is Snowflake's web UI at [app.snowflake.com](https://app.snowflake.com
 
 Terraform talks to the same account through the API. It never opens Snowsight.
 
-![Snowflake trial signup](../assets/freetrial.png)
+![Snowflake trial signup](../assets/00-setup/freetrial.png)
 
 A trial is enough. Credits are real — keep warehouses suspended when you are not querying.
 
@@ -52,8 +52,6 @@ chmod 600 .ssh/snowflake_tf_snow_key.p8                          # Restrict perm
 git check-ignore -v .ssh/snowflake_tf_snow_key.p8                # Confirm the private key is gitignored
 ```
 
-# End of Selection
-
 - `.p8` — private key, Terraform reads this
 - `.pub` — public key, paste the body into `initial_setup.sql`
 
@@ -75,6 +73,8 @@ SELECT
     LOWER(CURRENT_ORGANIZATION_NAME()) AS organization_name,
     LOWER(CURRENT_ACCOUNT_NAME())      AS account_name;
 ```
+
+![Snowsight worksheet showing organization_name and account_name](../assets/00-setup/00-setup.png)
 
 
 ## Step 3 — Create `TERRAFORM_SVC`
