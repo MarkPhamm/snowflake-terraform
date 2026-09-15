@@ -1,0 +1,10 @@
+# Copy to terraform.tfvars (gitignored) and fill in values from Snowsight:
+#   https://app.snowflake.com/<organization_name>/<account_name>/...
+# or from 00-setup/initial_setup.sql.
+
+organization_name = "your_org_name"
+account_name      = "your_account_name"
+
+# user               = "TERRAFORM_SVC"
+# private_key_path   = ".ssh/snowflake_tf_snow_key.p8"
+# provider_warehouse = "COMPUTE_WH"

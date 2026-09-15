@@ -1,3 +1,6 @@
+# Local Snowflake key pair — never commit private keys
+.ssh/
+
 # Local .terraform directories
 .terraform/
 
