@@ -7,8 +7,8 @@
 # }
 
 resource "snowflake_database" "this" {
-  name = "A"
-  comment = "B"
+  name         = "TF_LEARN_DB"
+  comment      = "Lesson 01 — learning database managed by Terraform"
   is_transient = false
   drop_public_schema_on_creation = true
 }
